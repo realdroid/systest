@@ -1,0 +1,53 @@
+from flask import flash, Flask, Markup, redirect, render_template, url_for, request
+from flask_sqlalchemy import SQLAlchemy
+from os.path import abspath, dirname, join
+
+
+app = Flask(__name__)
+
+_cwd = dirname(abspath(__file__))
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + join(_cwd, 'cluster.db')
+app.debug=True
+db = SQLAlchemy(app)
+
+
+class ClusterDetails(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    ip_address = db.Column(db.String(255), unique=True)
+
+    def __init__(self, ip_address):
+        self.ip_address = ip_address
+
+    def __repr__(self):
+        return '<ClusterDetails %r>' %self.ip_address
+
+
+@app.route('/')
+@app.route('/home')
+def index():
+    return render_template('/home.html')
+
+
+@app.route('/enter_details', methods=['POST'])
+def enter_details():
+    clusterdetails = ClusterDetails(request.form['ip_address'])
+    db.session.add(clusterdetails)
+    db.session.commit()
+    return render_template('/home.html')
+
+
+@app.route('/view_details')
+def view_details():
+    MyCluster = ClusterDetails.query.all()
+    OneCluster = ClusterDetails.query.filter_by(ip_address="10.1.1.1").all()
+    return render_template('/view_details.html', MyCluster=MyCluster, OneCluster=OneCluster)
+
+if __name__ == "__main__":
+    app.run()
+
+
+
+
+{% for cluster in MyCluster %}
+    <li>{{ cluster.ip_address }} - {{  }}  - {{ cluster.subnet }} </li>
+{% endfor %}

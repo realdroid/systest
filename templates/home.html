@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<div>
+<link rel="stylesheet" type="text/css" href="/static/css/stylesheet.css">
+<ul class="tab">
+  <li><a href="/home" class="tablinks">Home</a></li>
+  <li><a href="/view_details" class="tablinks">View</a></li>
+  <li><a href="/delete" class="tablinks">Delete</a></li>
+</ul>
+<h1>Nutanix Cluster Information Dashboard</h1>
+<body>
+    <form method="post" action="/enter_details">
+        <label>Cluster IP Address</label>
+        <input id="ip_address" name="ip_address" type="text"/>
+        <label>Username</label>
+        <input id="username" name="username" type="text"/>
+        <label>Password</label>
+        <input id="password" name="password" type="password"/>
+        <input type="submit" />
+    </form>
+</body>
+</div>
+</html>

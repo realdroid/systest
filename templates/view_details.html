@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<div>
+<body>
+
+<link rel="stylesheet" type="text/css" href="/static/css/stylesheet.css">
+<ul class="tab">
+  <li><a href="/home" class="tablinks">Home</a></li>
+  <li><a href="/view_details" class="tablinks">View</a></li>
+  <li><a href="/delete" class="tablinks">Delete</a></li>
+</ul>
+
+{% for cluster in MyCluster %}
+<p><table bgcolor="#eeffee" cellpadding="3" rules="all" frame="border">
+<tr align="center" bgcolor="#bbccbb">
+<th colspan="100">Cluster Information</th>
+</tr>
+<tr align="center" bgcolor="#bbccbb">
+    <th>IP Address</th>
+    <th> {{ cluster.ip_address }} </th>
+  </tr>
+  <tr>
+    <td>Name</td>
+    <td>{{ cluster.name }}</td>
+  </tr>
+  <tr>
+    <td>Internal Subnet</td>
+    <td> {{ cluster.internal_subnet }}  </td>
+   </tr>
+    <tr>
+    <td>External Subnet</td>
+    <td>{{ cluster.external_subnet }}</td>
+   </tr>
+    <tr>
+    <td>Version</td>
+    <td>{{ cluster.version }}</td>
+    </tr>
+    <tr>
+    <td>Number of nodes</td>
+    <td>{{ cluster.num_nodes }}</td>
+    </tr>
+    <tr bgcolor="#bbccbb">
+    <th colspan="100">Stats</th>
+    </tr>
+    <tr>
+    <td>Read IO PPM</td>
+    <td>{{ cluster.read_io_ppm }}</td>
+    </tr>
+    <tr>
+    <td>Number of IOPS</td>
+    <td>{{ cluster.num_iops }}</td>
+    </tr>
+    <tr>
+    <td>Content Cache Hit PPM</td>
+    <td>{{ cluster.content_cache_hit_ppm }}</td>
+    </tr>
+    <tr>
+    <td>Number of write IOPS</td>
+    <td>{{ cluster.num_write_iops }}</td>
+    </tr>
+
+</table>
+</p>
+{% endfor %}
+
+
+</body>
+    </div>
+</html>
